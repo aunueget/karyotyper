@@ -2,24 +2,21 @@ package extraction;
 
 import java.awt.Point;
 import java.util.LinkedList;
-
 import chromosome.ChromosomeCluster;
-import extraction.ClusterSplitter;
-
 import basic_objects.PointList;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class ClusterSplitterTest extends TestCase {
+public class ClusterSplitterTest{
 	private ChromosomeCluster myCluster;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp()throws Exception {
 		myCluster = new ChromosomeCluster(new Point(40, 40));
-		initCluster();
-	}
-
-	public void initCluster() {
 		// create vertical chromosome
 		for (int i = 8; i < 16; i++) {
 			for (int j = 0; j < 28; j++) {
@@ -45,9 +42,9 @@ public class ClusterSplitterTest extends TestCase {
 		myCluster.setPixel(new Point(19, 28), true);
 		myCluster.setPixel(new Point(18, 29), true);
 		myCluster.setSize(40, 40);
-
 	}
 
+	@Test
 	public void testGetCutPoints() {
 		int directions[] = { 3, 3, 3, 3, 6, 6, 6, 6 };
 		PointList tempList = ClusterSplitter.getCutPoints(new Point(14, 14), 1, 4, directions);
@@ -64,7 +61,7 @@ public class ClusterSplitterTest extends TestCase {
 		assertTrue(tempList.getList().contains(new Point(14, 20)));
 
 	}
-
+	@Test
 	public void testGet4Lowest() {
 		int directions[] = { 3, 2, 10, 3, 9, 6, 9, 6 };
 		LinkedList<Integer> tempList = ClusterSplitter.get4Lowest(directions);
@@ -75,7 +72,7 @@ public class ClusterSplitterTest extends TestCase {
 		assertEquals(tempList.get(3).intValue(), 5);
 
 	}
-
+	@Test
 	public void testGetLowestOppisiteSide() {
 		int directions[] = { 3, 2, 10, 3, 9, 6, 9, 6 };
 		assertEquals(ClusterSplitter.getLowestOppisiteSide(0, directions), 3);
@@ -84,7 +81,7 @@ public class ClusterSplitterTest extends TestCase {
 		assertEquals(ClusterSplitter.getLowestOppisiteSide(7, directions), 3);
 
 	}
-
+	@Test
 	public void testIsCrossSectionPartOfCluster() {
 		int directions[] = { 3, 2, 10, 3, 9, 6, 9, 6 };
 		assertTrue(ClusterSplitter.isCrossSectionPartOfCluster(0, 3, directions, 5));
@@ -94,7 +91,7 @@ public class ClusterSplitterTest extends TestCase {
 		assertFalse(ClusterSplitter.isCrossSectionPartOfCluster(0, 3, directions2, 5));
 
 	}
-
+	@Test
 	public void testGetQueenMoveLength() {
 		assertEquals(7, 12 - ClusterSplitter.getQueenMoveLength(myCluster, new Point(8, 27), 6, 12));
 		assertEquals(0, 12 - ClusterSplitter.getQueenMoveLength(myCluster, new Point(8, 27), 1, 12));
@@ -118,7 +115,7 @@ public class ClusterSplitterTest extends TestCase {
 				12 - ClusterSplitter.getQueenMoveLength(myCluster, new Point(8, 29), 0, 12));
 
 	}
-
+	@Test
 	public void testCheckForSplit() {
 		PointList tempList = ClusterSplitter.checkForSplit(myCluster, new Point(8, 29), 7);
 		assertEquals(tempList.getList().size(), 2);

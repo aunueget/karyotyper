@@ -5,46 +5,28 @@ package basic_objects;
 
 import java.awt.Point;
 import java.util.LinkedList;
-
 import medial_axis.DistanceMap;
 import medial_axis.MedialAxisGraph;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
 /**
  * @author Robert
  *
  */
-public class VertexTest extends TestCase {
+public class VertexTest{
 
 	private Vertex vertex;
 	/** Points ordered in breadth-first ordering from vertex */
 	private LinkedList<Point> pointList;
-	
-	/**
-	 * @param name
-	 */
-	public VertexTest(String name) {
-		super(name);
-		
-	}
 
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	protected void setUp() throws Exception {
-		super.setUp();
-		buildAxisGraph();
-	}
-
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
-	}
-	
-	private void buildAxisGraph() {
+	@Before
+	public void setUp()throws Exception {
 		buildPointList();
 		MedialAxisGraph graph = new MedialAxisGraph();
 		graph.buildGraph(pointList,  new DistanceMap(100, 100));
@@ -70,6 +52,7 @@ public class VertexTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.Vertex#calculateTangentLine(double, double)}.
 	 */
+	@Test
 	public void testCalculateTangentLine() {
 		double[] tangentLine = null;
 		try {
@@ -91,6 +74,7 @@ public class VertexTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.Vertex#calculateOrthogonalLine(double, double)}.
 	 */
+	@Test
 	public void testCalculateOrthogonalLine() {
 		double[] orthoLine = null;
 		try {
@@ -105,12 +89,13 @@ public class VertexTest extends TestCase {
 		
 		assertEquals(vertex.getPoint(), new Point(20,20));
 		assertTrue(slope == -1 * (19.0 - 20.0)/(17.0 - 20.0) || slope == -1 * (23.0 - 20.0)/(22.0 - 20.0));
-		assertEquals(intercept, 20.0 - 20.0*slope);
+		assertEquals(intercept, 20.0 - 20.0*slope,.001);
 	}
 
 	/**
 	 * Test method for {@link basic_objects.Vertex#hasBeenChecked()}.
 	 */
+	@Test
 	public void testHasBeenChecked() {
 		assertFalse(vertex.hasBeenChecked());
 	}
@@ -118,6 +103,7 @@ public class VertexTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.Vertex#setHasBeenChecked(boolean)}.
 	 */
+	@Test
 	public void testSetHasBeenChecked() {
 		vertex.setHasBeenChecked(true);
 		assertTrue(vertex.hasBeenChecked());
@@ -126,6 +112,7 @@ public class VertexTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.Vertex#tangentLine(int)}.
 	 */
+	@Test
 	public void testTangentLine() {
 		double[] tangent = null;
 		try {
@@ -157,6 +144,7 @@ public class VertexTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.Vertex#orthogonalLine(int)}.
 	 */
+	@Test
 	public void testOrthogonalLine() {
 		double[] orthogonal = null;
 		try {

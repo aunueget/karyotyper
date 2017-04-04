@@ -3,26 +3,29 @@ package extraction;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-
 import medial_axis.DistanceMap;
 import medial_axis.MedialAxis;
 import medial_axis.MedialAxisGraph;
-
 import basic_objects.OrthogonalLine;
 import basic_objects.Vector;
 import basic_objects.Vertex;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class MirrorSplitTest extends TestCase {
+public class MirrorSplitTest {
 	private LinkedList<Point> horizantolLine;
 	private LinkedList<Point> straightLine;
 	private DistanceMap distanceMap;
 	private DistanceMap distanceMapHorz;
 	private MedialAxisGraph testGraph;
 	private MirrorSplit mirror;
-	protected void setUp() throws Exception {
-		super.setUp();
+
+	@Before
+	public void setUp()throws Exception {
 		generateVertical();
 		generateHorizantal();
 		testGraph=new MedialAxisGraph();
@@ -53,6 +56,7 @@ public class MirrorSplitTest extends TestCase {
 		horizantolLine.add(new Point(11, 7));
 
 	}
+
 	public void generateVertical(){
 		distanceMap = new DistanceMap(15, 15);
 		for (int i = 0; i < distanceMap.getWidth(); i++) {
@@ -78,6 +82,7 @@ public class MirrorSplitTest extends TestCase {
 		}
 
 	}
+	@Test
 	public void testGetShortestDistance() {
 
 		MedialAxis tempAxis = new MedialAxis();
@@ -95,7 +100,7 @@ public class MirrorSplitTest extends TestCase {
 			System.out.println(e);
 		}
 
-		assertEquals(tempOrtho.getlength(), 8.0);
+		assertEquals(tempOrtho.getlength(), 8.0,.001);
 		assertEquals(tempOrtho.getUpperPoint(), new Point(3, 5));
 		assertEquals(tempOrtho.getLowerPoint(), new Point(11, 5));
 
@@ -116,7 +121,7 @@ public class MirrorSplitTest extends TestCase {
 			System.out.println(e);
 		}
 
-		assertEquals(tempOrtho.getlength(), 8.0);
+		assertEquals(tempOrtho.getlength(), 8.0,.001);
 		assertEquals(tempOrtho.getUpperPoint(), new Point(5, 3));
 		assertEquals(tempOrtho.getLowerPoint(), new Point(5, 11));
 
@@ -134,11 +139,12 @@ public class MirrorSplitTest extends TestCase {
 		assertEquals(testGraph.getDistanceMap().getDistanceFromEdge(new Point(5, 3)), 0);
 		tempOrtho = mirror.getShortestDistance(bounds, new Point(-1, -1), new Point(5, 5),
 				testGraph.getChromoWidth(), distanceMapHorz);
-		assertEquals(tempOrtho.getlength(), 8.0);
+		assertEquals(tempOrtho.getlength(), 8.0,.001);
 		assertEquals(tempOrtho.getUpperPoint(), new Point(5, 3));
 		assertEquals(tempOrtho.getLowerPoint(), new Point(5, 11));
 
 	}
+	@Test
 	public void testgetPathOrtho() {
 
 		MedialAxis tempAxis = new MedialAxis();
@@ -157,7 +163,7 @@ public class MirrorSplitTest extends TestCase {
 		}
 		
 		assertTrue(tempOrtho.isTwoLines());
-		assertEquals(tempOrtho.getlength(), 8.0);
+		assertEquals(tempOrtho.getlength(), 8.0,.001);
 		assertEquals(tempOrtho.getUpperPoint(), new Point(3, 5));
 		assertEquals(tempOrtho.getLowerPoint(), new Point(11, 5));
 
@@ -280,7 +286,7 @@ public class MirrorSplitTest extends TestCase {
 		assertEquals(tempOrtho.getLowerPoint(), new Point(5, 5));
 
 
-	}
+	}	@Test
 	public void testGetAllDistances() {
 		MedialAxis tempAxis = new MedialAxis();
 		tempAxis.setDistanceMap(distanceMap);
@@ -326,7 +332,7 @@ public class MirrorSplitTest extends TestCase {
 		
 		
 
-	}
+	}	@Test
 	public void testIsProjectionEnd(){
 		//test only one side oppisite previos touches distance map zero
 		generateHorizantal();
@@ -338,7 +344,7 @@ public class MirrorSplitTest extends TestCase {
 		assertTrue(mirror.isProjectionEnd(bounds, distanceMapHorz,new Vertex(new Point(5,7),5),new Vector(1,1)));
 		assertTrue(mirror.isProjectionEnd(bounds, distanceMapHorz,new Vertex(new Point(5,7),5),new Vector(-1,-1)));
 		
-	}
+	}	@Test
 	public void testGetNextPoint(){
 		
 		assertEquals(new Point(6,5), (mirror.getNextPoint(new Point(5,5), new Point(5,3), new Point(5,7), new Vector(1,0))).getPoint());
@@ -353,7 +359,7 @@ public class MirrorSplitTest extends TestCase {
 		assertEquals(new Point(6,8), (mirror.getNextPoint(new Point(5,8), new Point(5,4), new Point(5,10), new Vector(1,1))).getPoint());
 		assertEquals(new Point(7,9), (mirror.getNextPoint(new Point(5,8), new Point(5,4), new Point(5,10), new Vector(1,1))).getChildren().get(0).getPoint());
 
-	}
+	}	@Test
 	public void testGetNextVector(){
 		OrthogonalLine tempOrtho = new OrthogonalLine();
 		Vertex currPoint;
@@ -387,7 +393,7 @@ public class MirrorSplitTest extends TestCase {
 		assertTrue(vect.x>-2&&vect.x<-1);
 
 
-	}
+	}	@Test
 	public void testRecenterForUpper(){
 
 		OrthogonalLine tempOrtho = new OrthogonalLine();
@@ -401,7 +407,7 @@ public class MirrorSplitTest extends TestCase {
 		assertEquals(new Point(5,8),newPoint);
 
 
-	}
+	}	@Test
 	public void testRecenterForLower(){
 		OrthogonalLine tempOrtho = new OrthogonalLine();
 		Point newPoint;
@@ -413,7 +419,7 @@ public class MirrorSplitTest extends TestCase {
 		newPoint=mirror.recenterForLower(tempOrtho, 8);
 		assertEquals(new Point(9,1),newPoint);
 
-	}
+	}	@Test
 	public void testAngleBetween(){
 		OrthogonalLine tempOrtho = new OrthogonalLine();
 		

@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import characterization.ChromosomeBand;
-import characterization.ChromosomeBand.Type;
+import characterization.ChromosomeBand.BandType;
 
 /**
  * Wrapper for a Java HashMap that maps an idiogram to a chromosome number.
@@ -60,7 +60,7 @@ public class IdiogramMap {
 
 		String token = null;
 		int chromosomeNumber = 0;
-		ChromosomeBand.Type bandType;
+		ChromosomeBand.BandType bandType;
 		int bandLength = 0;
 		ChromosomeBand band = null;
 		int resolution = 0;
@@ -85,22 +85,22 @@ public class IdiogramMap {
 				// End debug
 
 				if (token.toLowerCase().equals("white")) {
-					bandType = Type.WHITE;
+					bandType = BandType.WHITE;
 					bandLength = lineReader.nextInt();
 					band = new ChromosomeBand(bandType, bandLength);
 					newIdiogram.add(band);
 				} else if (token.toLowerCase().equals("black")) {
-					bandType = Type.BLACK;
+					bandType = BandType.BLACK;
 					bandLength = lineReader.nextInt();
 					band = new ChromosomeBand(bandType, bandLength);
 					newIdiogram.add(band);
 				} else if (token.toLowerCase().equals("grey")) {
-					bandType = Type.GREY;
+					bandType = BandType.GREY;
 					bandLength = lineReader.nextInt();
 					band = new ChromosomeBand(bandType, bandLength);
 					newIdiogram.add(band);
 				} else if (token.toLowerCase().equals("centromere")) {
-					bandType = Type.CENTROMERE;
+					bandType = BandType.CENTROMERE;
 					bandLength = lineReader.nextInt();
 					band = new ChromosomeBand(bandType, bandLength);
 					newIdiogram.add(band);
@@ -123,7 +123,7 @@ public class IdiogramMap {
 	 * Gets the chromosome number that the requested idiogram maps to. If the idiogram requested is
 	 * not in the list of keys then null is returned.
 	 * 
-	 * @param i
+	 * @param index
 	 *            Requested idiogram
 	 * @return Chromosome number mapped to or null if the requested idiogram doesn't exist.
 	 */

@@ -1,17 +1,14 @@
 package basic_objects;
 
 import java.awt.Point;
+import org.junit.Test;
 
-import basic_objects.PointList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.TestCase;
-
-public class PointListTest extends TestCase {
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
+public class PointListTest{
+	@Test
 	public void testSetList() {
 		PointList tempList = new PointList(new Point(10, 2), 2);
 		tempList.addPoint(new Point(3, 2), 2);
@@ -27,7 +24,7 @@ public class PointListTest extends TestCase {
 		assertFalse(pointList.getList().contains(new Point(6, 10)));
 
 	}
-
+	@Test
 	public void testAddPoint() {
 		PointList tempList = new PointList(new Point(10, 2), 2);
 		assertTrue(tempList.addPoint(new Point(3, 2), 2));

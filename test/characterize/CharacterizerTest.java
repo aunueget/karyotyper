@@ -1,7 +1,6 @@
 package characterize;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
@@ -9,15 +8,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.imageio.ImageIO;
-
-import junit.framework.TestCase;
 import color.PixelColor;
+import org.junit.Test;
 
-public class CharacterizerTest extends TestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class CharacterizerTest {
 	private final double fpThreshold = 0.0001;
-
+	@Test
 	public void testPolygonalArea() {
 		ArrayList<Point2D> rightTriangle = new ArrayList<Point2D>(Arrays.asList(new Point(0, 0),
 				new Point(0, 2), new Point(2, 0)));
@@ -76,7 +76,7 @@ public class CharacterizerTest extends TestCase {
 				pentagonExpected, pentagonArea), pentagonArea < pentagonExpected + fpThreshold
 				&& pentagonArea > pentagonExpected - fpThreshold);
 	}
-
+	@Test
 	public void testBuildSlopeBufferVertical() {
 
 		/******** Test a basic linear buffer vertically ************************************ */
@@ -134,7 +134,7 @@ public class CharacterizerTest extends TestCase {
 			}
 		}
 	}
-
+	@Test
 	public void testBuildSlopeBufferHorizontal() {
 
 		/******** Test a basic linear buffer horizontally *********************************** */
@@ -194,7 +194,7 @@ public class CharacterizerTest extends TestCase {
 			}
 		}
 	}
-
+	@Test
 	public void testLinearizeChromosome() throws IOException {
 		String currentPath = (new File(".")).getCanonicalPath();
 		String chromFile = currentPath + File.separator + "testData" + File.separator
@@ -272,7 +272,7 @@ public class CharacterizerTest extends TestCase {
 			}
 		}
 	}
-
+	@Test
 	public void testCalculateBandFunction() throws IOException {
 		String currentPath = (new File(".")).getCanonicalPath();
 		String linearChromFile = currentPath + File.separator + "testData" + File.separator

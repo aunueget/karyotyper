@@ -1,16 +1,15 @@
 package basic_objects;
 
 import java.util.LinkedList;
+import org.junit.Test;
 
-import basic_objects.AroundPixel;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class AroundPixelTest extends TestCase {
-	protected void setUp() throws Exception {
-		super.setUp();
+public class AroundPixelTest {
 
-	}
-
+	@Test
 	public void testGetPositionsBetweenNeg() {
 		LinkedList<Integer> posList = AroundPixel.getPositionsBetweenNeg(0, 4);
 		assertEquals(posList.size(), 3);
@@ -24,7 +23,7 @@ public class AroundPixelTest extends TestCase {
 		assertFalse(posList.contains(0));
 
 	}
-
+	@Test
 	public void testGetPositionsBetweenPlus() {
 		LinkedList<Integer> posList = AroundPixel.getPositionsBetweenPlus(0, 4);
 		assertEquals(posList.size(), 3);
@@ -38,7 +37,7 @@ public class AroundPixelTest extends TestCase {
 		assertFalse(posList.contains(0));
 
 	}
-
+	@Test
 	public void testGetOppisitPos() {
 		assertEquals(4, AroundPixel.getOppisitePos(0));
 		assertEquals(5, AroundPixel.getOppisitePos(1));
@@ -50,7 +49,7 @@ public class AroundPixelTest extends TestCase {
 		assertEquals(3, AroundPixel.getOppisitePos(7));
 
 	}
-
+	@Test
 	public void testHandleLoop() {
 		assertEquals(7, AroundPixel.handleLoop(-1));
 		assertEquals(6, AroundPixel.handleLoop(-2));
