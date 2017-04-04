@@ -6,7 +6,9 @@ package basic_objects;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import org.apache.commons.math3.analysis.function.Ceil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -21,31 +23,15 @@ public class RadialVectorsTest extends TestCase {
 	private final int NUM_VECTORS = 8;
 	private final double DISTANCE = 10;
 
-	/**
-	 * @param name
-	 */
-	public RadialVectorsTest(String name) {
-		super(name);
-	}
-
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		radialVectors = new RadialVectors(CENTER_POINT, NUM_VECTORS, DISTANCE);
-		super.setUp();
-	}
-
-	/* (non-Javadoc)
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
 	}
 
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#getVectors()}.
 	 */
+	@Test
 	public void testGetVectors() {
 		ArrayList<Vector> vectorList = radialVectors.getVectors();
 		
@@ -81,6 +67,7 @@ public class RadialVectorsTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#getTheta()}.
 	 */
+	@Test
 	public void testGetTheta() {
 		double expectedTheta = 2 * Math.PI / NUM_VECTORS;
 		assertEquals(expectedTheta, radialVectors.getTheta());
@@ -89,6 +76,7 @@ public class RadialVectorsTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#getCenterPoint()}.
 	 */
+	@Test
 	public void testGetCenterPoint() {
 		assertEquals(CENTER_POINT, radialVectors.getCenterPoint());
 	}
@@ -96,6 +84,7 @@ public class RadialVectorsTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#getVectorsAsPointsOnImage()}.
 	 */
+	@Test
 	public void testGetVectorsAsPointsOnImage() {
 		ArrayList<Point> pointList = radialVectors.getVectorsAsPointsOnImage();
 		
@@ -114,6 +103,7 @@ public class RadialVectorsTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#getPointsInRange(java.awt.Point, double, int)}.
 	 */
+	@Test
 	public void testGetRange() {
 		ArrayList<Point> range = radialVectors.getPointsInRange(new Point(3,4), Math.PI/2, 5);
 		
@@ -140,6 +130,7 @@ public class RadialVectorsTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#getOpposite(java.awt.Point)}.
 	 */
+	@Test
 	public void testGetOpposite() {
 		Point oppPoint = radialVectors.getOpposite(new Point(CENTER_POINT.x + 1, CENTER_POINT.y));
 		
@@ -154,6 +145,7 @@ public class RadialVectorsTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#getPointAtIndex(int)}.
 	 */
+	@Test
 	public void testGetPointAtIndex() {
 		Point pointAtIndex = radialVectors.getPointAtIndex(2);
 		Point testPoint = new Point(CENTER_POINT.x, CENTER_POINT.y + 10);
@@ -164,11 +156,12 @@ public class RadialVectorsTest extends TestCase {
 	/**
 	 * Test method for {@link basic_objects.RadialVectors#multiplyRadius(double)}.
 	 */
+	@Test
 	public void testMultiplyRadius() {
 		radialVectors.multiplyRadius(2);
 		assertEquals(20.0, radialVectors.getDistance());
 	}
-	
+	@Test
 	public void testToString() {
 		radialVectors.normalize();
 		System.out.println(radialVectors.toString());

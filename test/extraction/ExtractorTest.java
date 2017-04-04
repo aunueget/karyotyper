@@ -6,23 +6,19 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.LinkedList;
-
 import javax.imageio.ImageIO;
-import javax.imageio.ImageWriter;
-
 import chromosome.ChromosomeCluster;
 import chromosome.GeneticSlideImage;
-
-import extraction.Extractor;
-
 import basic_objects.SearchArea;
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class ExtractorTest extends TestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+public class ExtractorTest{
+
+
 	public SearchArea cutInHalf(SearchArea searchArea){
 		int middle=(int)Math.round(searchArea.getHeight()/2);
 		for(int i=0;i<searchArea.getWidth();i++){
@@ -31,6 +27,7 @@ public class ExtractorTest extends TestCase {
 		
 		return searchArea;
 	}
+	@Test
 	public void testGetBounds(){
 		Extractor extract=new Extractor();
 		
@@ -91,7 +88,7 @@ public class ExtractorTest extends TestCase {
 		assertTrue(tempRect.equals(correct));
 
 
-	}
+	}	@Test
 	public void testGetMatchingPixelLeft(){
 		SearchArea searchArea=new SearchArea(10, 10);
 		searchArea=cutInHalf(searchArea);
@@ -199,7 +196,7 @@ public class ExtractorTest extends TestCase {
 			}
 		}
 
-	}
+	}	@Test
 	public void testGetMatchingPixel(){
 		BufferedImage tempImg = new BufferedImage(10,10, BufferedImage.TYPE_3BYTE_BGR);
 		for(int j=0;j<tempImg.getWidth();j++){
@@ -293,7 +290,7 @@ public class ExtractorTest extends TestCase {
 		}
 
 
-	}
+	}	@Test
 	public void testRemoveBackground(){
 		BufferedImage tempImg = new BufferedImage(10,10, BufferedImage.TYPE_3BYTE_BGR);
 		for(int j=0;j<tempImg.getWidth();j++){
@@ -321,7 +318,7 @@ public class ExtractorTest extends TestCase {
 		}
 
 
-	}
+	}	@Test
 	public void testFindClusters(){
 		BufferedImage tempImg = new BufferedImage(10,10, BufferedImage.TYPE_3BYTE_BGR);
 		for(int j=0;j<tempImg.getWidth();j++){
@@ -409,7 +406,7 @@ public class ExtractorTest extends TestCase {
 		assertEquals(new Point(0,5),tempList.get(0).getImageLocation());
 
 
-	}
+	}	@Test
 	public void testGetBlackBands(){
 		BufferedImage tempImg = new BufferedImage(10,10, BufferedImage.TYPE_3BYTE_BGR);
 		for(int j=0;j<tempImg.getWidth();j++){

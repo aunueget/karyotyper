@@ -1,29 +1,29 @@
 package chromosome;
 
+import org.junit.Before;
+import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import chromosome.GeneticSlideImage;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.TestCase;
-
-public class GeneticSlideImageTest extends TestCase {
+public class GeneticSlideImageTest{
 	GeneticSlideImage slide;
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp()throws Exception {
 		String currentPath = (new File(".")).getCanonicalPath();
 		String gradientImageFile = currentPath + File.separator + "testData" + File.separator
 				+ "GradientSwatch.png";
 		slide = new GeneticSlideImage(gradientImageFile);
 	}
-
+	@Test
 	public void testGetBackgroundThreshold() {
 		// Note that this test checks "proper behavior", however, it is very far from a "real world"
 		// test as we shouldn't see gradient images for slides.
 		assertEquals(139, slide.getBackgroundThreshold());
 	}
-
+	@Test
 	public void testComputeHistogram() throws IOException {
 		int[] expected = { 3, 3, 3, 1, 5, 5, 1, 7, 7, 1, 9, 9, 1, 11, 11, 3, 11, 13, 5, 11, 15, 7,
 				11, 17, 9, 11, 19, 11, 12, 20, 13, 14, 20, 15, 16, 20, 17, 18, 20, 19, 20, 21, 20,

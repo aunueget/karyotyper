@@ -1,13 +1,14 @@
 package color;
 
 import java.awt.Color;
-
 import color.PixelColor;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class PixelColorTest extends TestCase {
-
+public class PixelColorTest {
+	@Test
 	public void testIsAboveThreshold() {
 		// Test for expected exception
 		boolean exceptionFlag = false;

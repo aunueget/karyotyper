@@ -3,13 +3,15 @@ package medial_axis;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
-import junit.framework.TestCase;
-import medial_axis.DistanceMap;
-import medial_axis.MedialAxisGraph;
 import basic_objects.Vertex;
+import org.junit.Before;
+import org.junit.Test;
 
-public class MedialAxisGraphTest extends TestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public class MedialAxisGraphTest{
 	private LinkedList<Point> straightLine;
 	private LinkedList<Point> diagonalLine;
 	private LinkedList<Point> curvedLine;
@@ -19,8 +21,8 @@ public class MedialAxisGraphTest extends TestCase {
 	private LinkedList<Point> chunk4TrimWith3brances;
 	private DistanceMap distanceMap;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp()throws Exception {
 		distanceMap = new DistanceMap(15, 15);
 		for (int i = 0; i < distanceMap.getWidth(); i++) {
 			for (int j = 0; j < distanceMap.getHeight(); j++) {
@@ -167,7 +169,7 @@ public class MedialAxisGraphTest extends TestCase {
 		this.chunk4TrimWith3brances.add(new Point(11, 12));
 
 	}
-
+	@Test
 	public void testBuildGraph() {
 
 		MedialAxisGraph testGraph = new MedialAxisGraph();
@@ -189,7 +191,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertEquals(testGraph.getSegmentCount(), 3);
 
 	}
-
+	@Test
 	public void testRemoveSegments() {
 
 		LinkedList<Point> pointList;
@@ -205,7 +207,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertEquals(this.oneIntersection4branches.size() - 4, pointList.size());
 
 	}
-
+	@Test
 	public void testRemoveUnconnectedSegments() {
 
 		LinkedList<Point> pointList;
@@ -244,7 +246,7 @@ public class MedialAxisGraphTest extends TestCase {
 						.getMySegement(), 0);
 
 	}
-
+	@Test
 	public void testAddVertex() {
 		LinkedList<Point> pointList;
 		MedialAxisGraph testGraph = new MedialAxisGraph();
@@ -257,7 +259,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertEquals(testGraph.getSegmentCount(), 1);
 		assertEquals(testGraph.getIntersectionCount(testGraph.getAxisGraph()), 1);
 
-	}
+	}	@Test
 	public void testRemoveVertex(){
 		LinkedList<Point> pointList;
 		MedialAxisGraph testGraph = new MedialAxisGraph();
@@ -273,7 +275,7 @@ public class MedialAxisGraphTest extends TestCase {
 		
 
 	}
-
+	@Test
 	public void testGetSegment() {
 
 		LinkedList<Point> pointList;
@@ -323,7 +325,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertEquals(orderedList.get(9).getPoint(), new Point(9,9));
 		assertEquals(orderedList.get(10).getPoint(), new Point(10,10));
 	}
-
+	@Test
 	public void testCheckTinyLoop() {
 		MedialAxisGraph testGraph = new MedialAxisGraph();
 		testGraph.buildGraph(this.oneIntersection4branches, distanceMap);
@@ -338,7 +340,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertEquals(new Point(4, 4), tempVertex.getPoint());
 
 	}
-
+	@Test
 	public void testFillInSkeleton() {
 		LinkedList<Point> pointList;
 		MedialAxisGraph testGraph = new MedialAxisGraph();
@@ -356,7 +358,7 @@ public class MedialAxisGraphTest extends TestCase {
 			System.out.print(testGraph.getAxisGraph().get(i).getPoint().toString() + "--");
 		}
 	}
-
+	@Test
 	public void testGetBridgePoint() {
 		MedialAxisGraph testGraph = new MedialAxisGraph();
 		testGraph.buildGraph(this.threeSegmentGraph, distanceMap);
@@ -367,7 +369,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertEquals(new Point(10, 11), testGraph.getBridgePoint(6, new Point(9, 11)));
 		assertEquals(new Point(10, 11), testGraph.getBridgePoint(6, new Point(9, 11)));
 	}
-
+	@Test
 	public void testCheckForMostNewConnection() {
 		MedialAxisGraph testGraph = new MedialAxisGraph();
 		testGraph.buildGraph(this.threeSegmentGraph, distanceMap);
@@ -378,7 +380,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertEquals(1, testGraph.checkForMostNewConnection(6, new Point(9, 11)));
 		assertEquals(1, testGraph.checkForMostNewConnection(6, new Point(9, 11)));
 	}
-
+	@Test
 	public void testSameSegment() {
 		LinkedList<Point> pointList;
 		MedialAxisGraph testGraph = new MedialAxisGraph();
@@ -391,7 +393,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertFalse(testGraph.sameSegment(new Point(9, 11), new Point(11, 11)));
 
 	}
-
+	@Test
 	public void testTrimGraph(){
 		LinkedList<Point> pointList;
 		MedialAxisGraph testGraph = new MedialAxisGraph();
@@ -409,7 +411,7 @@ public class MedialAxisGraphTest extends TestCase {
 		assertFalse(pointList.contains(new Point(12, 11)));
 		assertTrue(pointList.contains(new Point(10, 10)));
 
-	}
+	}	@Test
 	public void testGetOrderedMedialAxis(){
 
 		MedialAxisGraph testGraph = new MedialAxisGraph();

@@ -1,15 +1,15 @@
 package characterization;
 
 public class ChromosomeBand {
-	public static enum Type {
+	public enum BandType {
 		BLACK, WHITE, GREY, CENTROMERE
-	};
+	}
 
-	private final Type type;
+	private final BandType type;
 	private final int length;
 	
-	public ChromosomeBand(Type type, int length) {
-		if (type == this.type.CENTROMERE && length == 0) {
+	public ChromosomeBand(BandType type, int length) {
+		if (type == BandType.CENTROMERE && length == 0) {
 			throw new IllegalArgumentException("Length of a centromere band cannot be non-zero.");
 		}
 		
@@ -17,7 +17,7 @@ public class ChromosomeBand {
 		this.length = length;
 	}
 
-	public Type type() {
+	public BandType type() {
 		return type;
 	}
 	

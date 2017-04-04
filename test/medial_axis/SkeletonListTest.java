@@ -2,19 +2,20 @@ package medial_axis;
 
 import java.awt.Point;
 import java.util.LinkedList;
-
-import medial_axis.SkeletonList;
-
 import basic_objects.PointList;
 import basic_objects.Vertex;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class SkeletonListTest extends TestCase {
+public class SkeletonListTest{
 	private LinkedList<Vertex> vertList;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp()throws Exception {
 		vertList = new LinkedList<Vertex>();
 		vertList.add(new Vertex(new Point(3, 1), 4));
 		vertList.add(new Vertex(new Point(2, 1), 5));
@@ -24,7 +25,7 @@ public class SkeletonListTest extends TestCase {
 		vertList.add(new Vertex(new Point(5, 1), 10));
 
 	}
-
+	@Test
 	public void testBuildFromVertexList() {
 
 		SkeletonList skelList = new SkeletonList();
@@ -41,7 +42,7 @@ public class SkeletonListTest extends TestCase {
 		assertTrue(tempList2.getList().contains(new Point(5, 1)));
 		assertEquals(tempList2.getList().size(), 1);
 	}
-
+	@Test
 	public void testAdd() {
 		SkeletonList skelList = new SkeletonList();
 		skelList.add(new Point(4, 4), 6);
@@ -66,7 +67,7 @@ public class SkeletonListTest extends TestCase {
 		assertEquals(skelList.getListAtDistance(6).getList().size(), 3);
 
 	}
-
+	@Test
 	public void testGetListAtDistance() {
 		SkeletonList skelList = new SkeletonList();
 		skelList.add(new Point(4, 4), 6);
@@ -82,7 +83,7 @@ public class SkeletonListTest extends TestCase {
 		assertTrue(tempList.getList().contains(new Point(7, 7)));
 
 	}
-
+	@Test
 	public void testGetOneList() {
 		SkeletonList skelList = new SkeletonList();
 		skelList.add(new Point(4, 4), 6);
